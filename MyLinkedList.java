@@ -15,6 +15,15 @@ class MyLinkedList {
 			next = null;
 		}
 	}
+	
+	public static void main(String[] args) {
+		MyLinkedList list = new MyLinkedList();
+		list.print();
+		list.addAtHead(1);
+		list.print();
+		
+		
+	}
     
     /** Initialize your data structure here. */
     public MyLinkedList() {
@@ -75,24 +84,48 @@ class MyLinkedList {
     
     /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
     public void addAtIndex(int index, int val) {
-        Node newNode = new Node(val);
-        Node cursor = head;
-        int counter = 0;
-        
-        //get to right position
-        while(cursor != null && counter < index - 1) {
-        	cursor = cursor.next;
-        	counter++;
-        }
-        
-        if (cursor == null && counter == index) {
-        	
-        }
+    	//add to beginning
+    	if (index == 0) {
+    		addAtHead(val);
+    	}
+    	
+    	else {
+            Node newNode = new Node(val);
+            Node cursor = head;
+            int counter = 0;
+            
+            //get to right position
+            while(cursor != null && counter < index - 1) {
+            	cursor = cursor.next;
+            	counter++;
+            }
+            
+            //satisfying this if statement means that it is valid
+            if (cursor != null && counter == index - 1) {
+            	//it is at the tail
+            	if (cursor == tail) {
+            		addAtTail(val);
+            	}
+            	else {
+            		newNode.next = cursor.next;
+            		cursor.next = newNode;
+            	}
+            }
+           
+    	}
     }
     
     /** Delete the index-th node in the linked list, if the index is valid. */
     public void deleteAtIndex(int index) {
         
+    }
+    
+    public void print() {
+    	Node cursor = head;
+    	while(cursor != null) {
+    		System.out.println(cursor.val);
+    		cursor = cursor.next;
+    	}
     }
 }
 
