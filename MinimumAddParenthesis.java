@@ -1,35 +1,25 @@
 ass Solution {
     public int minAddToMakeValid(String S) {
-        int ans = 0;
-        Stack<Character> stack = new Stack<>();
         
-        if (S != null) {
-    
-            for(int i = 0; i < S.length(); i++) {
-                Character c = S.charAt(i);
-                if (c == '(')
-                    stack.push(c);
-                else if (stack.isEmpty()) {
-                    ans++;
-                }
-                else {
-                    stack.pop();
-                }
-                
-            }
+        int openUnmatched = 0;
+        int closedUnmatched = 0;
+        
+        for (int i = 0; i < S.length(); i++) {
+            if (S.charAt(i) == '(') 
+                openUnmatched++;
+            else if (S.charAt(i) == ')' && openUnmatched > 0)
+                openUnmatched--;
+            else if (S.charAt(i) == ')' && openUnmatched == 0)
+                closedUnmatched++;
         }
-            return ans + stack.size();
+        
+        return openUnmatched + closedUnmatched;
     }
     
     /*
-    to be valid, for every opening parentheses we need to have a closing one.. we can use a stack to replicate this
-
-    3 scenarios:
-    1) valid parenthesis: stack size = 0 at the end ie: (())
-    2) invalid parenthesis:
-        a) too many opening parenthesis: (((), stack size != 0 adding to the end
-        b) too many closing parenthesis: ())), stack size == 0 add to sum for each time stack is empty and we want an opening parenthesis
-    
+        
+        To improve on the previous solution, make it more efficient by getting rid of the stack.
+        We can check if it is valid and keep track of the number of both open and closed parenthesis that are unmatched instead of having to push and pop onto the stack everytime.
     
     */
 }
