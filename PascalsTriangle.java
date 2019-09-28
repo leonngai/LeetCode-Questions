@@ -4,18 +4,12 @@ class Solution {
         for (int row = 0; row < numRows; row++) {
             List<Integer> list = new ArrayList<>();
             for (int col = 0; col <= row; col++) {
-                list.add(getNumber(row, col));
+                if (row == col || col == 0)
+                    list.add(1);
+                else
+                    list.add(lists.get(row - 1).get(col - 1) + lists.get(row - 1).get(col));    
             }
             lists.add(list);
         }
         return lists;
     }
-    
-    public int getNumber(int row, int col) {
-        if (row == col || col == 0)
-            return 1;
-        
-        return getNumber(row - 1, col - 1) + getNumber(row - 1, col);
-    }
-    
-}
