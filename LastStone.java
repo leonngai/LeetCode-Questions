@@ -1,6 +1,30 @@
 class Solution {
-    public int lastStoneWeight(int[] stones) {
-        HashSet<Integer> visited = new HashSet<>();
+   public int lastStoneWeight(int[] stones) {
+       int index = stones.length;
+
+       while(index > 2) {
+           Arrays.sort(stones, 0, index);
+           int biggest = stones[index - 1], secondBiggest = stones[index - 2];
+           
+           if (biggest == secondBiggest)
+               index -= 2;
+           else {
+               stones[index - 2] = biggest - secondBiggest;
+               index--;
+           }
+       }
+       
+        if (index == 2)
+    	   return Math.abs(stones[1] - stones[0]);
+       else
+    	   return stones[0];
+    }
+    
+}
+    
+    /*  Brute Force
+    
+            HashSet<Integer> visited = new HashSet<>();
         int secondBiggest = 0, biggest = 0;
         
         while(stones.length - visited.size() > 2) {
@@ -59,5 +83,4 @@ class Solution {
         }
         
         return biggest - secondBiggest;
-    }
-}
+*/
