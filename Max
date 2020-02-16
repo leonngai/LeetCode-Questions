@@ -1,0 +1,17 @@
+class Solution {
+    public int largestSumAfterKNegations(int[] A, int K) {
+        int sum = 0, min = Integer.MAX_VALUE;
+        Arrays.sort(A);
+        
+        //Iterate through array and flip negative numbers until K is either 0 or we run out of negative numbers to flip
+        for (int i = 0; i < A.length && A[i] < 0 && K > 0; i++, K--)
+            A[i] = -A[i];
+        
+        for (int n : A) {
+            sum += n;
+            min = Math.min(n, min);
+        }
+        
+        return sum - (K % 2) * min * 2;
+    }
+}
