@@ -9,7 +9,7 @@ class Solution {
             String sortedWord = new String(sArray);
             
             if (!map.containsKey(sortedWord)) {
-                List<String> newList = new ArrayList<>();
+                List<String> newList = new LinkedList<>();
                 newList.add(s);
                 res.add(newList);
                 map.put(sortedWord, newList);
