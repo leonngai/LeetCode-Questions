@@ -1,4 +1,5 @@
-tion for singly-linked list.
+/**
+ * Definition for singly-linked list.
  * public class ListNode {
  *     int val;
  *     ListNode next;
@@ -7,19 +8,13 @@ tion for singly-linked list.
  */
 class Solution {
     public ListNode middleNode(ListNode head) {
-        ListNode slowPointer = head;
-        ListNode fastPointer = head.next;
+        ListNode slow = head, fast = head;
         
-        //if fast pointer equals null, then we know it is an odd number list
-        //if fast pointer.next equals null, then we know it is an even numbe r list
-        while(fastPointer != null && fastPointer.next != null) {
-            slowPointer = slowPointer.next;
-            fastPointer = fastPointer.next.next;
+        while(fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
         }
         
-        if (fastPointer == null)
-            return slowPointer;
-        
-        return slowPointer.next;
+        return slow;
     }
 }
