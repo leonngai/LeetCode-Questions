@@ -1,38 +1,18 @@
 class Solution {
-    public int findJudge(int N, int[][] pairs) {
-        Map<Integer, Set<Integer>> map = new HashMap<>();
+    public int findJudge(int N, int[][] trust) {
+        int[] inDegree = new int[N + 1], outDegree = new int[N + 1];
         
-        for (int i = 0; i < pairs.length; i++) {
-            if (map.containsKey(pairs[i][0])) {
-                map.get(pairs[i][0]).add(pairs[i][1]);
-            }
-            else {
-                Set<Integer> list = new HashSet<>();
-                list.add(pairs[i][1]);
-                map.put(pairs[i][0], list);
-            }
+        //build the in degree and out degree graph
+        for (int[] arr : trust) {
+            inDegree[arr[1]]++;
+            outDegree[arr[0]]++;
         }
         
-        int key = -1;
-        
-        for (int i = 1; i <= N; i++) {
-            if (!map.containsKey(i)) {
-                key = i;
-                break;
-            }
+        for (int i = 1; i < N + 1; i++) {
+            if (inDegree[i] == N - 1 && outDegree[i] == 0)
+                return i;
         }
         
-        if (key == -1)
-            return -1;
-        
-        for (int i = 1; i <= N; i++) {
-            if (i == key)
-                continue;
-            
-            if (!map.containsKey(i) || !map.get(i).contains(key))
-                return -1;
-        }
-        
-        return key;
+        return -1;
     }
 }
