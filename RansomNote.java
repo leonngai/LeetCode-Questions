@@ -7,12 +7,10 @@ class Solution {
         }
         
         for (int i = 0; i < ransomNote.length(); i++) {
-            if (count[ransomNote.charAt(i) - 'a'] == 0)
+            if (map[ransomNote.charAt(i) - 'a']-- <= 0)
                 return false;
-            
-            count[ransomNote.charAt(i) - 'a']--;
-        }
-        
+        } 
+      
         return true;
     }
 }
